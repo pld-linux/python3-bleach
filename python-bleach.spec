@@ -10,7 +10,7 @@ Summary:	An easy safelist-based HTML-sanitizing tool
 Summary(pl.UTF-8):	Proste, oparte na liście elementów bezpiecznych, narzędzie do porządkowania HTML-a
 Name:		python-bleach
 Version:	3.1.0
-Release:	4
+Release:	5
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/bleach/
