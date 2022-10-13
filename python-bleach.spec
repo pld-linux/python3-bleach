@@ -9,14 +9,14 @@
 Summary:	An easy safelist-based HTML-sanitizing tool
 Summary(pl.UTF-8):	Proste, oparte na liście elementów bezpiecznych, narzędzie do porządkowania HTML-a
 Name:		python-bleach
-Version:	3.1.0
-Release:	6
+# keep 3.x here for python2 support
+Version:	3.3.1
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/bleach/
 Source0:	https://files.pythonhosted.org/packages/source/b/bleach/bleach-%{version}.tar.gz
-# Source0-md5:	fc8df989e0200a45f7a3a95ef9ee9854
-Patch0:		%{name}-pytest.patch
+# Source0-md5:	b4c1b8f27289f9e5d73792daed4c0879
 URL:		https://pypi.org/project/bleach/
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -25,17 +25,15 @@ BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %if %{with tests}
 BuildRequires:	python-pytest >= 3.0.0
-BuildRequires:	python-pytest-runner >= 2.0
 BuildRequires:	python-six >= 1.9.0
 BuildRequires:	python-webencodings
 %endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-modules >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools
 %if %{with tests}
 BuildRequires:	python3-pytest >= 3.0.0
-BuildRequires:	python3-pytest-runner >= 2.0
 BuildRequires:	python3-six >= 1.9.0
 BuildRequires:	python3-webencodings
 %endif
@@ -59,7 +57,7 @@ zabezpieczająca lub usuwająca znaczniki i atrybuty.
 Summary:	An easy safelist-based HTML-sanitizing tool
 Summary(pl.UTF-8):	Proste, oparte na liście elementów bezpiecznych, narzędzie do porządkowania HTML-a
 Group:		Libraries/Python
-Requires:	python3-modules >= 1:3.4
+Requires:	python3-modules >= 1:3.5
 
 %description -n python3-bleach
 Bleach is an allowed-list-based HTML sanitizing library that escapes
@@ -82,15 +80,24 @@ Dokumentacja API modułu Pythona bleach.
 
 %prep
 %setup -q -n bleach-%{version}
-%patch0 -p1
 
 %build
 %if %{with python2}
-%py_build %{?with_tests:test}
+%py_build
+
+%if %{with tests}
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+%{__python} -m pytest tests
+%endif
 %endif
 
 %if %{with python3}
-%py3_build %{?with_tests:test}
+%py3_build
+
+%if %{with tests}
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+%{__python3} -m pytest tests
+%endif
 %endif
 
 %if %{with doc}
