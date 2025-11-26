@@ -7,27 +7,26 @@
 Summary:	An easy safelist-based HTML-sanitizing tool
 Summary(pl.UTF-8):	Proste, oparte na liście elementów bezpiecznych, narzędzie do porządkowania HTML-a
 Name:		python3-bleach
-Version:	6.2.0
+Version:	6.3.0
 Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/bleach/
 Source0:	https://files.pythonhosted.org/packages/source/b/bleach/bleach-%{version}.tar.gz
-# Source0-md5:	bee79c9f4a17a85945fa54221d5d8391
+# Source0-md5:	a3dd2c185e20be9dce348692d1e705d5
 URL:		https://pypi.org/project/bleach/
-BuildRequires:	python3-modules >= 1:3.7
+BuildRequires:	python3-modules >= 1:3.10
 BuildRequires:	python3-setuptools
 %if %{with tests}
-BuildRequires:	python3-pytest >= 3.0.0
-BuildRequires:	python3-six >= 1.9
+BuildRequires:	python3-pytest >= 8.2.2
 BuildRequires:	python3-webencodings
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with doc}
-BuildRequires:	sphinx-pdg-3
+BuildRequires:	sphinx-pdg-3 >= 7.4.4
 %endif
-Requires:	python3-modules >= 1:3.7
+Requires:	python3-modules >= 1:3.10
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
